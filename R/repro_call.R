@@ -2,9 +2,7 @@
 #'
 #' @noRd
 S7::method(repro_chunk, S7::class_call) <- function(x, ..., repro_code = Repro(), env = rlang::caller_env()) {
-  if (rlang::is_call(x, c("req", "validate"))) {
-    return(NULL)
-  } else if (is.null(rlang::call_name(x))) {
+  if (is.null(rlang::call_name(x))) {
     eval_call <- x
   } else if (is_input_call(x)) {
     eval_call <- eval(x, envir = env)
