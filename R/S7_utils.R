@@ -9,3 +9,4 @@
 #'
 #' @noRd
 class_reactive <- S7::new_S3_class("reactiveExpr")
+class_event_reactive <- S7::new_S3_class("reactive.event")
