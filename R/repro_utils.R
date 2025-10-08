@@ -5,11 +5,10 @@
 #' an expression.
 #'
 #' @noRd
-is_reactive_call <- function(x, env = rlang::caller_env(), parent_env = FALSE) {
+is_reactive_call <- function(x, env = rlang::caller_env()) {
   rlang::is_call(x) &&
     length(rlang::call_args(x)) == 0 &&
-    (rlang::call_name(x) %in% names(env) ||
-       (parent_env && rlang::call_name(x) %in% names(parent.env(env))))
+    rlang::call_name(x) %in% names(env)
 }
 
 is_reactive_val_call <- function(x, env = rlang::caller_env()) {
@@ -17,8 +16,14 @@ is_reactive_val_call <- function(x, env = rlang::caller_env()) {
     inherits(env[[rlang::call_name(x)]], "reactiveVal")
 }
 
-is_subset_call <- function(x) {
-  rlang::is_call(x, c("$", "[", "[["))
+is_reactive_values_call <- function(x, env = rlang::caller_env()) {
+  rlang::is_call(x, "$") &&
+    tryCatch(inherits(get(rlang::call_args(x)[[1]], envir = env), "reactivevalues"), error = \(e) FALSE) &&
+    as.character(rlang::call_args(x)[[1]]) != "input"
+}
+
+is_any_reactive_call <- function(x, env = rlang::caller_env()) {
+  is_reactive_call(x, env) || is_reactive_call(x, parent.env(env)) || is_reactive_values_call(x, env)
 }
 
 is_input_call <- function(x) {

@@ -11,6 +11,9 @@ S7::method(repro_chunk, S7::class_call) <- function(x, ..., repro_code = Repro()
   } else if (is_reactive_val_call(x, env)) {
     reactive_val <- eval(x, envir = env)
     eval_call <- rlang::call2("<-", as.symbol(rlang::call_name(x)), reactive_val)
+  } else if (is_reactive_values_call(x, env)) {
+    reactive_val <- eval(x, envir = env)
+    eval_call <- rlang::call2("<-", rlang::call_args(x)[[2]], reactive_val)
   } else if (is_reactive_call(x, env)) {
     repro_call <- repro_chunk(env[[rlang::call_name(x)]])
     repro_code@packages <- repro_call@packages
@@ -23,7 +26,7 @@ S7::method(repro_chunk, S7::class_call) <- function(x, ..., repro_code = Repro()
     # TODO: work out how to get expression from within anonymous function body
     eval_call <- x
   } else {
-    reactive_calls <- vapply(rlang::call_args(x), is_reactive_call, env = env, parent_env = TRUE, logical(1L))
+    reactive_calls <- vapply(rlang::call_args(x), is_any_reactive_call, env = env, logical(1L))
     repro_args <- lapply(rlang::call_args(x), \(x) repro_chunk(x, env = env))
     eval_args <- purrr::map(repro_args, "code") |> unlist(recursive = FALSE)
 
