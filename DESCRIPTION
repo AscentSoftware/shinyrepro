@@ -16,9 +16,12 @@ Imports:
     rlang,
     styler
 Suggests:
+    knitr,
+    rmarkdown,
     shiny,
     testthat (>= 3.0.0)
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Config/Needs/website: ascentsoftware/ascentdown
+VignetteBuilder: knitr
