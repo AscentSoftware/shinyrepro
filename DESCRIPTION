@@ -4,7 +4,7 @@ Title: Reproducible Code for 'Shiny' Objects
 Version: 0.1.0
 Authors@R: c(person("Ashley", "Baldry", email = "ashley.baldry@ascent.io", role = c("aut", "cre")))
 Description: Provides functionality to extract reactive expressions from a 'Shiny' application and 
-    convert them into standalone R scripts. This enables users to reproduce tables and visualizations 
+    convert them into stand-alone R scripts. This enables users to reproduce tables and visualisations 
     outside the interactive UI, facilitating integration into static reports or automated workflows 
     without requiring access to the original application source code.
 License: MIT + file LICENSE
@@ -20,6 +20,7 @@ Suggests:
     rmarkdown,
     shiny,
     testthat (>= 3.0.0)
+Language: en-GB
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3
