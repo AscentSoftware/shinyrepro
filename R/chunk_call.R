@@ -17,7 +17,7 @@ S7::method(repro_chunk, S7::class_call) <- function(x, ..., repro_code = Repro()
     call_env <- parent.env(env)
   }
 
-  class(x) <- c(call_name, class(x))
+  class(x) <- c(call_name, unclass(class(x)))
 
   repro_call_chunk(
     x = x,

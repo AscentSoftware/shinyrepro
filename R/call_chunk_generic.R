@@ -5,8 +5,9 @@
 #'
 #' @noRd
 S7::method(repro_call_chunk, S7::class_any) <- function(x, repro_code = Repro(), env = rlang::caller_env()) {
-  reactive_calls <- vapply(rlang::call_args(x), is_any_reactive_call, env = env, logical(1L))
-  repro_args <- lapply(rlang::call_args(x), \(x) repro_chunk(x, env = env))
+  x_args <- x |> unclass() |> rlang::call_args()
+  reactive_calls <- vapply(x_args, is_any_reactive_call, env = env, logical(1L))
+  repro_args <- lapply(x_args, \(y) repro_chunk(y, env = env))
   eval_args <- purrr::map(repro_args, "code") |> unlist(recursive = FALSE)
 
   if (any(reactive_calls)) {

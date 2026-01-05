@@ -12,7 +12,7 @@ S7::method(repro_call_chunk, class_call_subset) <- function(x, repro_code = Repr
     reactive_val <- eval(x, envir = env)
     eval_call <- rlang::call2("<-", rlang::call_args(x)[[2]], reactive_val)
   } else {
-    class(x) <- c(".__generic", class(x))
+    class(x) <- c(".__generic", class(unclass(x)))
     return(
       repro_call_chunk(
         x = x,

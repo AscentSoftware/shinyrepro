@@ -21,6 +21,7 @@ Suggests:
     knitr,
     rmarkdown,
     shiny,
+    spelling,
     testthat (>= 3.0.0)
 Language: en-GB
 Encoding: UTF-8
