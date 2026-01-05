@@ -1,5 +1,6 @@
 #' Reproducing Code for Call Object
 #'
+#' @include repro_chunk.R
 #' @noRd
 S7::method(repro_chunk, S7::class_call) <- function(x, ..., repro_code = Repro(), env = rlang::caller_env()) {
   call_env <- env

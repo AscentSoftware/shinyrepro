@@ -28,3 +28,23 @@ RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Config/Needs/website: ascentsoftware/ascentdown
 VignetteBuilder: knitr
+Collate: 
+    'S7_Repro.R'
+    'S7_utils.R'
+    'repro_call_chunk.R'
+    'call_chunk_function.R'
+    'call_chunk_generic.R'
+    'call_chunk_if.R'
+    'call_chunk_null.R'
+    'call_chunk_reactive.R'
+    'call_chunk_reactval.R'
+    'call_chunk_shiny.R'
+    'call_chunk_subset.R'
+    'call_chunk_utils.R'
+    'repro_chunk.R'
+    'chunk_bind_reactive.R'
+    'chunk_call.R'
+    'chunk_generic.R'
+    'chunk_reactive.R'
+    'package.R'
+    'repro.R'

@@ -3,6 +3,7 @@
 #' @description
 #' Standard response is to return the called object
 #'
+#' @include repro_call_chunk.R
 #' @noRd
 S7::method(repro_call_chunk, class_call_subset) <- function(x, repro_code = Repro(), env = rlang::caller_env()) {
   if (is_input_call(x)) {

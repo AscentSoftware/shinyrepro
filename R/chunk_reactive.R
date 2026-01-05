@@ -1,5 +1,6 @@
 #' Reproducing Code for Reactive Object
 #'
+#' @include repro_chunk.R
 #' @noRd
 S7::method(repro_chunk, class_reactive) <- function(x, ..., repro_code = Repro(), env = rlang::caller_env()) {
   observer <- attr(x, "observable", exact = TRUE)
