@@ -1,11 +1,13 @@
 # Reproduce Code Chunk
 
-A short description...
+Evaluate a chunk of code to extract Shiny inputs and reactives,
+replacing the inputs with the values selected by the user, and the
+reactives with the code bodies used to generate them.
 
 ## Usage
 
 ``` r
-repro_chunk(x, ..., env = rlang::caller_env())
+repro_chunk(x, repro_code = Repro(), env = rlang::caller_env())
 ```
 
 ## Arguments
@@ -15,9 +17,9 @@ repro_chunk(x, ..., env = rlang::caller_env())
   [`reactive`](https://rdrr.io/pkg/shiny/man/reactive.html) object to
   make reproducible
 
-- ...:
+- repro_code:
 
-  Additional arguments to pass to other methods
+  A `Repro` object to
 
 - env:
 
@@ -34,5 +36,5 @@ provided expression when evaluated.
 ## Details
 
 Whilst a default is provided to `env`, it is unlikely that this is the
-same environment `x` is defined in. This is more of a placeholder for
-sending the correct environment to
+same environment `x` is defined in. This allows the top-level `repro`
+call
