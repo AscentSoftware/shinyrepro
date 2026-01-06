@@ -31,7 +31,7 @@ Config/testthat/edition: 3
 Config/Needs/website: ascentsoftware/ascentdown
 VignetteBuilder: knitr
 Collate: 
-    'S7_Repro.R'
+    'Repro_S7.R'
     'S7_utils.R'
     'repro_call_chunk.R'
     'call_chunk_function.R'
