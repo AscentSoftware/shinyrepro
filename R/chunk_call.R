@@ -1,8 +1,11 @@
-#' Reproducing Code for Call Object
+#' @description
+#' When reproducing an R call, a check is required to see if it is a standard R expression,
+#' or if it a call to a reactive object. This is to either extract the stored `reactiveVal`,
+#' or to get the expression used within the given `reactive`.
 #'
 #' @include repro_chunk.R
 #' @noRd
-S7::method(repro_chunk, S7::class_call) <- function(x, ..., repro_code = Repro(), env = rlang::caller_env()) {
+S7::method(repro_chunk, S7::class_call) <- function(x, repro_code = Repro(), env = rlang::caller_env()) {
   call_env <- env
   call_name <- rlang::call_name(x) %||% "NULL"
 

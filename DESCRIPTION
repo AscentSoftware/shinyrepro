@@ -44,7 +44,6 @@ Collate:
     'call_chunk_subset.R'
     'call_chunk_utils.R'
     'repro_chunk.R'
-    'chunk_bind_reactive.R'
     'chunk_call.R'
     'chunk_generic.R'
     'chunk_reactive.R'

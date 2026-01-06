@@ -1,15 +1,18 @@
 #' Reproduce Code Chunk
 #'
 #' @description
-#' A short description...
+#' Evaluate a chunk of code to extract Shiny inputs and reactives, replacing the inputs with
+#' the values selected by the user, and the reactives with the code bodies used to generate
+#' them.
 #'
 #' @param x \code{\link[shiny]{reactive}} object to make reproducible
-#' @param env The environment `x` is defined in. By default it is the environment of where \code{repro} is called
-#' @param ... Additional arguments to pass to other methods
+#' @param repro_code A `Repro` object to
+#' @param env The environment `x` is defined in. By default it is the environment of where
+#' \code{repro} is called
 #'
 #' @details
-#' Whilst a default is provided to \code{env}, it is unlikely that this is the same environment `x` is defined
-#' in. This is more of a placeholder for sending the correct environment to
+#' Whilst a default is provided to \code{env}, it is unlikely that this is the same environment
+#' `x` is defined in. This allows the top-level `repro` call
 #'
 #' @return
 #' A \code{\link{Repro}} object containing all the necessary code and packages to recreate
@@ -19,5 +22,5 @@
 repro_chunk <- S7::new_generic(
   name = "repro_chunk",
   dispatch_args = "x",
-  fun = function(x, ..., env = rlang::caller_env()) S7::S7_dispatch()
+  fun = function(x, repro_code = Repro(), env = rlang::caller_env()) S7::S7_dispatch()
 )

@@ -4,24 +4,27 @@
 \alias{repro_chunk}
 \title{Reproduce Code Chunk}
 \usage{
-repro_chunk(x, ..., env = rlang::caller_env())
+repro_chunk(x, repro_code = Repro(), env = rlang::caller_env())
 }
 \arguments{
 \item{x}{\code{\link[shiny]{reactive}} object to make reproducible}
 
-\item{...}{Additional arguments to pass to other methods}
+\item{repro_code}{A \code{Repro} object to}
 
-\item{env}{The environment \code{x} is defined in. By default it is the environment of where \code{repro} is called}
+\item{env}{The environment \code{x} is defined in. By default it is the environment of where
+\code{repro} is called}
 }
 \value{
 A \code{\link{Repro}} object containing all the necessary code and packages to recreate
 the provided expression when evaluated.
 }
 \description{
-A short description...
+Evaluate a chunk of code to extract Shiny inputs and reactives, replacing the inputs with
+the values selected by the user, and the reactives with the code bodies used to generate
+them.
 }
 \details{
-Whilst a default is provided to \code{env}, it is unlikely that this is the same environment \code{x} is defined
-in. This is more of a placeholder for sending the correct environment to
+Whilst a default is provided to \code{env}, it is unlikely that this is the same environment
+\code{x} is defined in. This allows the top-level \code{repro} call
 }
 \keyword{internal}
