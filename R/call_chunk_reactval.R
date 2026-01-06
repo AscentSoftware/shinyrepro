@@ -1,11 +1,9 @@
-#' Generic Method for Reproducing Code
-#'
 #' @description
-#' Standard response is to return the called object
+#' Extracting the contents of the `reactiveVal` in a human-readable way
 #'
 #' @noRd
 S7::method(repro_call_chunk, class_call_reactval) <- function(x, repro_code = Repro(), env = rlang::caller_env()) {
-  reactive_val <- eval(x, envir = env)
+  reactive_val <- rlang::eval_bare(x, env = env)
   eval_call <- rlang::call2("<-", as.symbol(rlang::call_name(x)), reactive_val)
 
   repro_code@packages <- get_pkg_name(x)
