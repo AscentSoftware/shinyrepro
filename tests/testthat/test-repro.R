@@ -108,19 +108,19 @@ test_that("When one non-standard package is used, it is added to the top of the 
       session$setInputs(min_width = 3.5, summary_fn = "median")
 
       repro_code <- repro(summary_tbl)
+      browser()
       expect_identical(
         repro_code,
         paste(
           "library(purrr)",
           "",
           "iris_filt <- iris[with(iris, Sepal.Width > 3.5), ]",
-          "purrr::map(head(names(iris), 4),",
-          "  dat = iris_filt, fn = \"median\",",
+          "purrr::map(",
+          "  head(names(iris), 4),",
+          "  dat = iris_filt,",
+          "  fn = \"median\",",
           "  function(x, dat, fn) {",
-          "    aggregate(as.formula(paste(x, \"~ Species\")),",
-          "      data = dat,",
-          "      FUN = get(fn)",
-          "    )",
+          "    aggregate(as.formula(paste(x, \"~ Species\")), data = dat, FUN = get(fn))",
           "  }",
           ")",
           sep = "\n"

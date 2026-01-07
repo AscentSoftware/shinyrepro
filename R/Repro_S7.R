@@ -89,10 +89,10 @@ Repro <- S7::new_class(
 #'
 #' @description
 #' A helper function to check whether or not the reactive variables to be added
-#' to the Repro object already exists. Used to avoid duplicate definitions being
+#' to the `Repro` object already exists. Used to avoid duplicate definitions being
 #' added to a script.
 #'
-#' @param new,exisitng A named list of reactive variable defintions
+#' @param new,exisitng A named list of reactive variable definitions
 #'
 #' @returns
 #' A boolean stating whether or not there is at least one reactive definition
