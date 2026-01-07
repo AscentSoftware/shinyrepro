@@ -108,7 +108,6 @@ test_that("When one non-standard package is used, it is added to the top of the 
       session$setInputs(min_width = 3.5, summary_fn = "median")
 
       repro_code <- repro(summary_tbl)
-      browser()
       expect_identical(
         repro_code,
         paste(
