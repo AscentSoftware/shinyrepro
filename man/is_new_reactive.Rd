@@ -7,7 +7,7 @@
 is_new_reactive(new, exisitng)
 }
 \arguments{
-\item{new, exisitng}{A named list of reactive variable defintions}
+\item{new, exisitng}{A named list of reactive variable definitions}
 }
 \value{
 A boolean stating whether or not there is at least one reactive definition
@@ -15,7 +15,7 @@ in \code{new} that doesn't exist in \code{existing}
 }
 \description{
 A helper function to check whether or not the reactive variables to be added
-to the Repro object already exists. Used to avoid duplicate definitions being
+to the \code{Repro} object already exists. Used to avoid duplicate definitions being
 added to a script.
 }
 \keyword{internal}

@@ -98,3 +98,13 @@ get_pkg_name <- function(x, base_pkgs = NULL) {
     pkg_name
   }
 }
+
+#' Construct Reactive Value
+#'
+#' @noRd
+construct_reactive <- function(x, env = rlang::caller_env()) {
+  x |>
+    rlang::eval_bare(env = env) |>
+    constructive::construct(one_liner = TRUE) |>
+    _[["code"]]
+}
