@@ -74,22 +74,45 @@ required to run outside of Shiny to re-create the specified
 reactive.</p>
 </div>
 <div class="section level2">
+<h2 id="best-practices">Best Practices<a class="anchor" aria-label="anchor" href="#best-practices"></a>
+</h2>
+<div class="section level3">
+<h3 id="business-logic-package">Business Logic Package<a class="anchor" aria-label="anchor" href="#business-logic-package"></a>
+</h3>
+<p>So that developers can easily recreate outputs generated in Shiny
+applications, add any business logic, such as ETL, data manipulation and
+modelling, to a separate package. This will allow users to recreate the
+tables and plots generated in the app without having to install all the
+packages associated with the application.</p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
 </h2>
 <div class="section level3">
-<h3 id="anonymous-functions">Anonymous Functions<a class="anchor" aria-label="anchor" href="#anonymous-functions"></a>
+<h3 id="secrets">Secrets<a class="anchor" aria-label="anchor" href="#secrets"></a>
 </h3>
-<p>Currently it is hard to check the contents of anonymous functions for
-inputs and/or reactive objects, such as functions used in the
-<code>apply</code> family functions or <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">purrr::map</a></code>. The
-workaround for this is to have them as named arguments, therefore they
-are sent to the anonymous function as updated in shinyrepro.</p>
+<p>If you are using secrets, such as environment variables, make sure
+that they are defined within a reactive expression. If it is defined in
+the module, or in the global environment, the secret will be written in
+the assignment.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Bad</span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">*</span> <span class="va">input</span><span class="op">$</span><span class="va">mult</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Good</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/moduleServer.html" class="external-link">moduleServer</a></span><span class="op">(</span><span class="va">id</span>, <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">my_reactive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/reactive.html" class="external-link">reactive</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">api_key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MY_API_KEY"</span><span class="op">)</span></span>
+<span>    <span class="va">...</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Good</span></span>
-<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, mult <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">mult</span>, \<span class="op">(</span><span class="va">x</span>, <span class="va">mult</span><span class="op">)</span> <span class="va">x</span> <span class="op">*</span> <span class="va">mult</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Bad</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/moduleServer.html" class="external-link">moduleServer</a></span><span class="op">(</span><span class="va">id</span>, <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">api_key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MY_API_KEY"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">my_reactive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/reactive.html" class="external-link">reactive</a></span><span class="op">(</span><span class="op">{</span></span>
+<span>    <span class="va">...</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
