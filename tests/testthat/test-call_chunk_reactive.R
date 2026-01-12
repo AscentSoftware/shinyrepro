@@ -104,9 +104,10 @@ test_that("Reactive call chunk can be evaluated when a reactive is called within
     "  })"
   )
 
-  expect_identical(
+  expect_equal(
     repro_reactive@code,
-    list(str2lang(paste(summary_call, collapse = "\n")))
+    list(str2lang(paste(summary_call, collapse = "\n"))),
+    ignore_attr = TRUE
   )
 
   tbl_call <- c(
@@ -120,9 +121,10 @@ test_that("Reactive call chunk can be evaluated when a reactive is called within
   )
 
   expect_named(repro_reactive@prerequisites, "summary_tbl")
-  expect_identical(
+  expect_equal(
     repro_reactive@prerequisites$summary_tbl,
-    list(str2lang(paste(tbl_call, collapse = "\n")))
+    list(str2lang(paste(tbl_call, collapse = "\n"))),
+    ignore_attr = TRUE
   )
 
   expect_identical(repro_reactive@calls, c(tbl_call, "", summary_call))

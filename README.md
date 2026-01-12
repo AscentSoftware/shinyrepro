@@ -1,11 +1,18 @@
 # shinyrepro
 
-The aim of {shinyrepro} is to be able to recreate any output that is available in a Shiny application
-outside of the application itself.
+The aim of **shinyrepro** is to be able to recreate any output that is available in a Shiny application
+outside of said application. 
+
+In static documents, like Quarto, it is easy to include the code chunk by including code folding. 
+Due to the interactiveness of Shiny, this isn't as easy to include out of the box. Reactive depend on
+inputs set by the user, and need to be replaced in the reactive expressions to be able to run in an
+environment outside of Shiny.
+
+
 
 ## Installation
 
-To get the latest version of {shinyrepro}, install from GitHub:
+To get the latest version of shinyrepro, install from GitHub:
 
 ```r
 require(remotes)

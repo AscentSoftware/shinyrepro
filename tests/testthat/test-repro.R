@@ -263,3 +263,31 @@ test_that("Able to reproduce a reactive without printing the environment variabl
     }
   )
 })
+
+test_that("When reproducing a reactive with multiple dependency reactives, similar variables are not overriding", {
+  min_value <- 6
+
+  reactive_1 <- shiny::reactive({
+    min_value <- 1.5
+    subset(iris, Petal.Width >= min_value)
+  })
+
+  reactive_2 <- shiny::reactive({
+    subset(mtcars, cyl >= min_value)
+  })
+
+  reactive_3 <- shiny::reactive({
+    nrow(reactive_1()) * nrow(reactive_2())
+  })
+
+  repro_r1 <- shiny::isolate(repro(reactive_1))
+  expect_no_match(repro_r1, "min_value <- 6")
+
+  repro_r3 <- shiny::isolate(repro(reactive_3))
+  expect_match(repro_r3, "min_value <- 6")
+  remove(min_value, reactive_1, reactive_2, reactive_3)
+
+  this_env <- environment()
+  expect_silent(rlang::parse_exprs(repro_r3) |> purrr::walk(rlang::eval_bare, env = this_env))
+  expect_identical(nrow(reactive_1) * nrow(reactive_2), 64L * 21L)
+})
