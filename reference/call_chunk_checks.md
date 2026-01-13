@@ -18,6 +18,9 @@ variable.
 `is_any_reactive_call` checks whether or not the call points to
 evaluating a `reactive`, `reactiveVal` or `reactiveValues`.
 
+`is_variable_call` checks whether or not the call point to a variable
+that is defined within the given module.
+
 `is_input_call` checks whether or not the call points to evaluate an
 input value.
 
@@ -35,6 +38,8 @@ is_reactive_values_call(x, env = rlang::caller_env())
 
 is_any_reactive_call(x, env = rlang::caller_env())
 
+is_variable_call(x, existing_vars = NULL, env = rlang::caller_env())
+
 is_input_call(x)
 
 is_session_user_data(x)
@@ -51,6 +56,11 @@ is_session_user_data(x)
   The environment the call is being made, by default it is the
   environment calling the check, but is likely the environment the call
   is being made i.e. the reactive expression.
+
+- existing_vars:
+
+  A character vector of variable definitions that exist in the `Repro`
+  object
 
 ## Value
 
