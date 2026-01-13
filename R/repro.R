@@ -6,7 +6,7 @@
 #'
 #' @param x \code{\link[shiny]{reactive}} object to make reproducible
 #'
-#' @return
+#' @returns
 #' A character string, that when printed (using \code{\link[base]{cat}}),
 #' displays the script that reproduces the contents of `x`.
 #'

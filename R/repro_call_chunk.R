@@ -11,7 +11,7 @@
 #' Whilst a default is provided to \code{env}, it is unlikely that this is the same environment `x` is defined
 #' in. This is more of a placeholder for sending the correct environment to
 #'
-#' @return
+#' @returns
 #' A \code{\link{Repro}} object containing all the necessary code and packages to recreate
 #' the provided expression when evaluated.
 #'
