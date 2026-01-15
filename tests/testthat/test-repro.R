@@ -291,3 +291,30 @@ test_that("When reproducing a reactive with multiple dependency reactives, simil
   expect_silent(rlang::parse_exprs(repro_r3) |> purrr::walk(rlang::eval_bare, env = this_env))
   expect_identical(nrow(reactive_1) * nrow(reactive_2), 64L * 21L)
 })
+
+test_that("When a reactive feeds is bound by an event, the repro only updates when the reactive updates", {
+  test_server <- function(input, output, session) {
+    my_name <- reactive(input$name) |>
+      bindEvent(input$button, ignoreInit = TRUE)
+
+    test_reactive <- reactive(repro(my_name)) |>
+      bindEvent(my_name())
+  }
+
+  shiny::testServer(
+    test_server,
+    expr = {
+      expect_error(my_name())
+      expect_error(test_reactive())
+
+      session$setInputs(name = "Name", button = 1L)
+      expect_identical(test_reactive(), "\"Name\"")
+
+      session$setInputs(name = "Not My Name")
+      expect_identical(test_reactive(), "\"Name\"")
+
+      session$setInputs(button = 2L)
+      expect_identical(test_reactive(), "\"Not My Name\"")
+    }
+  )
+})
