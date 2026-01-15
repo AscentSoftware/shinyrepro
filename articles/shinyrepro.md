@@ -10,6 +10,26 @@ as the {highlighter} package to display the script in the UI.
 
 ## Best Practices
 
+### Bind `repro` call to Event
+
+The code to reproduce a given reactive will be updated whenever an input
+or reactive feeding into the provided reactive is updated, therefore it
+is recommended to have the reactive as an event attached.
+
+``` r
+width_range <- reactive({
+  iris_filt <- dplyr::filter(iris, Species == "versicolor")
+  range(iris_filt$Petal.Width)
+})
+
+# Good
+repro_range <- reactive(repro(width_range)) |>
+  bindEvent(width_range())
+  
+# Bad
+repro_range <- reactive(repro(width_range))
+```
+
 ### Put Side-Effects in Observers
 
 This is general best-practice when developing Shiny applications, but

@@ -50,7 +50,8 @@ ui <- fluidPage(
       "Summary Function",
       c("Mean" = "mean", "Median" = "median", "SD" = "sd"),
       selected = "mean"
-    )
+    ),
+    actionButton("update", "Update")
   ),
   fluidRow(
     column(
@@ -69,7 +70,8 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   iris_filt <- reactive({
     iris[with(iris, Petal.Width > input$min_width), ]
-  })
+  }) |>
+    bindEvent(input$update)
 
   summary_tbl <- reactive({
     aggregate(
@@ -77,7 +79,8 @@ server <- function(input, output, session) {
       data = iris_filt(),
       FUN = get(input$summary_fn)
     )
-  })
+  }) |>
+    bindEvent(input$update)
 
   output$table <- renderTable(summary_tbl())
   output$code <- renderText(repro(summary_tbl))
