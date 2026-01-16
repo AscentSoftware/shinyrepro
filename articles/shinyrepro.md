@@ -65,7 +65,7 @@ summary_data <- reactive({
 
 ### Create a Business Logic Package
 
-So that developers can easily recreate outputs generated in Shiny
+In order that developers can easily recreate outputs generated in Shiny
 applications, add any business logic, such as ETL, data manipulation and
 modelling, to a separate package. This will allow users to recreate the
 tables and plots generated in the app without having to install all the
