@@ -41,13 +41,13 @@ A set of helper functions that determine what type of call is being made within
 an expression.
 
 \code{is_reactive_call} checks whether or not the call is evaluating a
-\code{\link[shiny]{reactive}} variable.
+\code{shiny::reactive} variable.
 
 \code{is_reactive_val_call} checks whether or not the call is evaluating a
-\code{\link[shiny]{reactiveVal}} variable.
+\code{shiny::reactiveVal} variable.
 
 \code{is_reactive_values_call} checks whether or not the call is evaluating an item
-within a \code{\link[shiny]{reactiveValues}} variable.
+within a \code{shiny::reactiveValues} variable.
 
 \code{is_any_reactive_call} checks whether or not the call points to evaluating a
 \code{reactive}, \code{reactiveVal} or \code{reactiveValues}.

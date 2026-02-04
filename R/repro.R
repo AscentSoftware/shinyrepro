@@ -1,13 +1,13 @@
 #' Reproduce Code
 #'
 #' @description
-#' Construct the code within a given \code{\link[shiny]{reactive}} object
+#' Construct the code within a given `shiny::reactive` object
 #' to be able to re-create the output outside of a Shiny session.
 #'
-#' @param x \code{\link[shiny]{reactive}} object to make reproducible
+#' @param x `shiny::reactive` object to make reproducible
 #'
 #' @returns
-#' A character string, that when printed (using \code{\link[base]{cat}}),
+#' A character string, that when printed (using `base::cat`),
 #' displays the script that reproduces the contents of `x`.
 #'
 #' @examples

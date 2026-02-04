@@ -10,9 +10,9 @@
 #' stored in reactive calls.
 #'
 #' \describe{
-#' \item{class_reactive}{The class capturing \code{\link[shiny]{reactive}} calls}
-#' \item{class_event_cache}{The class capturing \code{\link[shiny]{bindCache}} calls}
-#' \item{class_event_reactive}{The class capturing \code{\link[shiny]{bindEvent}} calls}
+#' \item{class_reactive}{The class capturing [shiny::reactive()] calls}
+#' \item{class_event_cache}{The class capturing [shiny::bindCache()] calls}
+#' \item{class_event_reactive}{The class capturing [shiny::bindEvent()] calls}
 #' \item{class_bind_reactive}{
 #' The union of `class_event_cache` and `class_event_reactive`
 #' }
@@ -25,17 +25,17 @@
 #'
 #' \describe{
 #' \item{class_call_function}{The class capturing anonymous function definitions}
-#' \item{class_call_reactive}{The class capturing evaluated \code{\link[shiny]{reactive}} objects}
+#' \item{class_call_reactive}{The class capturing evaluated [shiny::reactive()] objects}
 #' \item{class_call_reactval}{
-#' The class capturing evaluated \code{\link[shiny]{reactiveValues}} objects
+#' The class capturing evaluated [shiny::reactiveValues()] objects
 #' }
 #' \item{class_call_if}{The class capturing `if` calls}
 #' \item{class_call_null}{The class capturing undefined calls, such as `pkg::fn`}
 #' \item{class_call_shiny}{
 #' The class capturing ignorable shiny function calls such as
-#' \code{\link[shiny]{req}} and \code{\link[shiny]{validate}}
+#' [shiny::req()] and [shiny::validate()]
 #' }
-#' \item{class_call_subset}{The class capturing a subset (\code{$}) call}
+#' \item{class_call_subset}{The class capturing a subset (`$`) call}
 #' }
 #'
 #' @usage NULL

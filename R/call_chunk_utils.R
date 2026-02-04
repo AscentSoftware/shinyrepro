@@ -4,8 +4,8 @@
 #' A set of helper functions that determine what type of call is being made within
 #' an expression.
 #'
-#' \code{is_reactive_call} checks whether or not the call is evaluating a
-#'  \code{\link[shiny]{reactive}} variable.
+#' `is_reactive_call` checks whether or not the call is evaluating a
+#'  `shiny::reactive` variable.
 #'
 #' @param x An R call object
 #' @param env The environment the call is being made, by default it is the environment
@@ -24,8 +24,8 @@ is_reactive_call <- function(x, env = rlang::caller_env()) {
 }
 
 #' @description
-#' \code{is_reactive_val_call} checks whether or not the call is evaluating a
-#' \code{\link[shiny]{reactiveVal}} variable.
+#' `is_reactive_val_call` checks whether or not the call is evaluating a
+#' `shiny::reactiveVal` variable.
 #'
 #' @rdname call_chunk_checks
 is_reactive_val_call <- function(x, env = rlang::caller_env()) {
@@ -34,8 +34,8 @@ is_reactive_val_call <- function(x, env = rlang::caller_env()) {
 }
 
 #' @description
-#' \code{is_reactive_values_call} checks whether or not the call is evaluating an item
-#' within a \code{\link[shiny]{reactiveValues}} variable.
+#' `is_reactive_values_call` checks whether or not the call is evaluating an item
+#' within a `shiny::reactiveValues` variable.
 #'
 #' @rdname call_chunk_checks
 is_reactive_values_call <- function(x, env = rlang::caller_env()) {
@@ -45,8 +45,8 @@ is_reactive_values_call <- function(x, env = rlang::caller_env()) {
 }
 
 #' @description
-#' \code{is_any_reactive_call} checks whether or not the call points to evaluating a
-#' \code{reactive}, \code{reactiveVal} or \code{reactiveValues}.
+#' `is_any_reactive_call` checks whether or not the call points to evaluating a
+#' `reactive`, `reactiveVal` or `reactiveValues`.
 #'
 #' @rdname call_chunk_checks
 is_any_reactive_call <- function(x, env = rlang::caller_env()) {
