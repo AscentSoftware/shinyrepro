@@ -21,7 +21,7 @@ repro_chunk(x, repro_code = Repro(), env = rlang::caller_env())
 
   A `Repro` object to store calls found in `x`. By default it is empty,
   but if `x` is not the first call within an expression, this will have
-  prior calls and pre-requesites that might be used in `x`.
+  prior calls and pre-requisites that might be used in `x`.
 
 - env:
 
