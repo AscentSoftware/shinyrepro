@@ -3,16 +3,16 @@
 #' @description
 #' A short description...
 #'
-#' @param x \code{call} object to make reproducible, with prefixed class of the call name
-#' @param env The environment `x` is defined in. By default it is the environment of where \code{repro} is called
+#' @param x `call` object to make reproducible, with prefixed class of the call name
+#' @param env The environment `x` is defined in. By default it is the environment of where `repro` is called
 #' @param ... Additional arguments to pass to other methods
 #'
 #' @details
-#' Whilst a default is provided to \code{env}, it is unlikely that this is the same environment `x` is defined
+#' Whilst a default is provided to `env`, it is unlikely that this is the same environment `x` is defined
 #' in. This is more of a placeholder for sending the correct environment to
 #'
 #' @returns
-#' A \code{\link{Repro}} object containing all the necessary code and packages to recreate
+#' A `Repro` object containing all the necessary code and packages to recreate
 #' the provided expression when evaluated.
 #'
 #' @noRd

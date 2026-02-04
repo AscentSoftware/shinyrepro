@@ -7,15 +7,17 @@
 repro_chunk(x, repro_code = Repro(), env = rlang::caller_env())
 }
 \arguments{
-\item{x}{\code{\link[shiny]{reactive}} object to make reproducible}
+\item{x}{\code{\link[shiny:reactive]{shiny::reactive()}} object to make reproducible}
 
-\item{repro_code}{A \code{Repro} object to}
+\item{repro_code}{A \code{Repro} object to store calls found in \code{x}. By default it is
+empty, but if \code{x} is not the first call within an expression, this will have
+prior calls and pre-requesites that might be used in \code{x}.}
 
 \item{env}{The environment \code{x} is defined in. By default it is the environment of where
 \code{repro} is called}
 }
 \value{
-A \code{\link{Repro}} object containing all the necessary code and packages to recreate
+A \code{Repro} object containing all the necessary code and packages to recreate
 the provided expression when evaluated.
 }
 \description{

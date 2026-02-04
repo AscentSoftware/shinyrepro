@@ -5,17 +5,19 @@
 #' the values selected by the user, and the reactives with the code bodies used to generate
 #' them.
 #'
-#' @param x \code{\link[shiny]{reactive}} object to make reproducible
-#' @param repro_code A `Repro` object to
+#' @param x [shiny::reactive()] object to make reproducible
+#' @param repro_code A `Repro` object to store calls found in `x`. By default it is
+#' empty, but if `x` is not the first call within an expression, this will have
+#' prior calls and pre-requesites that might be used in `x`.
 #' @param env The environment `x` is defined in. By default it is the environment of where
-#' \code{repro} is called
+#' `repro` is called
 #'
 #' @details
-#' Whilst a default is provided to \code{env}, it is unlikely that this is the same environment
+#' Whilst a default is provided to `env`, it is unlikely that this is the same environment
 #' `x` is defined in. This allows the top-level `repro` call
 #'
 #' @returns
-#' A \code{\link{Repro}} object containing all the necessary code and packages to recreate
+#' A `Repro` object containing all the necessary code and packages to recreate
 #' the provided expression when evaluated.
 #'
 #' @keywords internal

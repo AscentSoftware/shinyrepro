@@ -7,14 +7,14 @@
 repro(x)
 }
 \arguments{
-\item{x}{\code{\link[shiny]{reactive}} object to make reproducible}
+\item{x}{\code{shiny::reactive} object to make reproducible}
 }
 \value{
-A character string, that when printed (using \code{\link[base]{cat}}),
+A character string, that when printed (using \code{base::cat}),
 displays the script that reproduces the contents of \code{x}.
 }
 \description{
-Construct the code within a given \code{\link[shiny]{reactive}} object
+Construct the code within a given \code{shiny::reactive} object
 to be able to re-create the output outside of a Shiny session.
 }
 \examples{
