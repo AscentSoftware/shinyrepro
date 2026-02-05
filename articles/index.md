@@ -3,4 +3,4 @@
 ### All vignettes
 
 - [Introduction to
-  shinyrepro](https://ascentsoftware.github.io/shinyrepro/articles/shinyrepro.md):
+  shinyreprex](https://ascentsoftware.github.io/shinyreprex/articles/shinyrepro.md):

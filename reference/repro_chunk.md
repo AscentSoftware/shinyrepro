@@ -26,7 +26,7 @@ repro_chunk(x, repro_code = Repro(), env = rlang::caller_env())
 - env:
 
   The environment `x` is defined in. By default it is the environment of
-  where `repro` is called
+  where `reprex_reactive` is called
 
 ## Value
 
@@ -36,5 +36,6 @@ recreate the provided expression when evaluated.
 ## Details
 
 Whilst a default is provided to `env`, it is unlikely that this is the
-same environment `x` is defined in. This allows the top-level `repro`
-call
+same environment `x` is defined in. This allows the top-level
+`reprex_reactive` call to pass through environments found for calls to
+other reactives in the chunk.

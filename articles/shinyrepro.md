@@ -1,17 +1,14 @@
-# Introduction to shinyrepro
+# Introduction to shinyreprex
 
-## Using shinyrepro
+## Using shinyreprex
 
-There is a single exported function, `repro`, that takes a reactive
-object and converts it into a script that can be reused outside of the
-Shiny application to reproduce the result of the reactive. This can be
-sent to a simple `verbatimTextOutput` or something more UX friendly such
-as the [highlighter](https://federiva.github.io/highlighter/) package to
-display the script in the UI.
+There is a single exported function,
+``` reprex_reactive``, that takes a reactive object and converts it into a script that can be reused outside of the Shiny application to reproduce the result of the reactive. This can be sent to a simple ```verbatimTextOutput`or something more UX friendly such as the`{highlighter}\`
+package to display the script in the UI.
 
 ## Best Practices
 
-### Bind `repro` call to Event
+### Bind `reprex_reactive` call to Event
 
 The code to reproduce a given reactive will be updated whenever an input
 or reactive feeding into the provided reactive is updated, therefore it
@@ -24,11 +21,11 @@ width_range <- reactive({
 })
 
 # Good
-repro_range <- reactive(repro(width_range)) |>
+repro_range <- reactive(reprex_reactive(width_range)) |>
   bindEvent(width_range())
   
 # Bad
-repro_range <- reactive(repro(width_range))
+repro_range <- reactive(reprex_reactive(width_range))
 ```
 
 ### Put Side-Effects in Observers

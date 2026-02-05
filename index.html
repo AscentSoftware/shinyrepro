@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Reproducible Code for Shiny Objects • shinyrepro</title>
+<title>Reproducible Code for Shiny Objects • shinyreprex</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Nunito-0.4.10/font.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-none" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">shinyrepro</a>
+    <a class="navbar-brand me-2" href="index.html">shinyreprex</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
@@ -34,15 +34,20 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="articles/shinyrepro.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/shinyrepro.html">Introduction to shinyreprex</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/AscentSoftware/shinyrepro/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/AscentSoftware/shinyreprex/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -51,31 +56,31 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="shinyrepro">shinyrepro<a class="anchor" aria-label="anchor" href="#shinyrepro"></a>
+<div class="page-header"><h1 id="shinyreprex">shinyreprex<a class="anchor" aria-label="anchor" href="#shinyreprex"></a>
 </h1></div>
 <!-- badges: start -->
 
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The aim of <strong>shinyrepro</strong> is to be able to recreate any reactive or output that is available in a Shiny application outside of said application.</p>
+<p>The aim of <strong>shinyreprex</strong> is to be able to recreate any reactive or output that is available in a Shiny application outside of said application.</p>
 <p>In static documents, like Quarto, it is easy to include the code chunk by including code folding. Due to the interactiveness of Shiny, this isn’t as easy to include out of the box. Reactive depend on inputs set by the user, and need to be replaced in the reactive expressions to be able to run in an environment outside of Shiny.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To get the latest version of shinyrepro, install from GitHub:</p>
+<p>To get the latest version of shinyreprex, install from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AscentSoftware/shinyrepro"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AscentSoftware/shinyreprex"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The following examples takes a couple of inputs, and uses one of them in one reactive, and the other in another reactive. The second reactive is a table output, which can be passed to <code>repro</code> to re-create the code that generates the table seen in the UI.</p>
+<p>The following examples takes a couple of inputs, and uses one of them in one reactive, and the other in another reactive. The second reactive is a table output, which can be passed to <code>reprex_reactive</code> to re-create the code that generates the table seen in the UI.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AscentSoftware/shinyrepro" class="external-link">shinyrepro</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AscentSoftware/shinyreprex" class="external-link">shinyreprex</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h1</a></span><span class="op">(</span><span class="st">"Reproducible Code Example"</span><span class="op">)</span>,</span>
@@ -126,7 +131,7 @@
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/bindEvent.html" class="external-link">bindEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">update</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderTable.html" class="external-link">renderTable</a></span><span class="op">(</span><span class="fu">summary_tbl</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">output</span><span class="op">$</span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span><span class="fu"><a href="reference/repro.html">repro</a></span><span class="op">(</span><span class="va">summary_tbl</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/renderPrint.html" class="external-link">renderText</a></span><span class="op">(</span><span class="fu"><a href="reference/reprex_reactive.html">reprex_reactive</a></span><span class="op">(</span><span class="va">summary_tbl</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
@@ -135,8 +140,8 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/AscentSoftware/shinyrepro/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/AscentSoftware/shinyrepro/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/AscentSoftware/shinyreprex/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/AscentSoftware/shinyreprex/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -152,7 +157,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing shinyrepro</a></li>
+<li><a href="authors.html#citation">Citing shinyreprex</a></li>
 </ul>
 </div>
 
@@ -166,7 +171,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/AscentSoftware/shinyrepro/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/AscentSoftware/shinyrepro/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/AscentSoftware/shinyreprex/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/AscentSoftware/shinyreprex/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

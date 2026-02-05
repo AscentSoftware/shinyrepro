@@ -1,8 +1,8 @@
-# shinyrepro
+# shinyreprex
 
 ## Overview
 
-The aim of **shinyrepro** is to be able to recreate any reactive or
+The aim of **shinyreprex** is to be able to recreate any reactive or
 output that is available in a Shiny application outside of said
 application.
 
@@ -14,23 +14,23 @@ able to run in an environment outside of Shiny.
 
 ## Installation
 
-To get the latest version of shinyrepro, install from GitHub:
+To get the latest version of shinyreprex, install from GitHub:
 
 ``` r
 require(remotes)
-remotes::install_github("AscentSoftware/shinyrepro")
+remotes::install_github("AscentSoftware/shinyreprex")
 ```
 
 ## Usage
 
 The following examples takes a couple of inputs, and uses one of them in
 one reactive, and the other in another reactive. The second reactive is
-a table output, which can be passed to `repro` to re-create the code
-that generates the table seen in the UI.
+a table output, which can be passed to `reprex_reactive` to re-create
+the code that generates the table seen in the UI.
 
 ``` r
 library(shiny)
-library(shinyrepro)
+library(shinyreprex)
 
 ui <- fluidPage(
   h1("Reproducible Code Example"),
@@ -81,7 +81,7 @@ server <- function(input, output, session) {
     bindEvent(input$update)
 
   output$table <- renderTable(summary_tbl())
-  output$code <- renderText(repro(summary_tbl))
+  output$code <- renderText(reprex_reactive(summary_tbl))
 }
 
 shinyApp(ui, server)
